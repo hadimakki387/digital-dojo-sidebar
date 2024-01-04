@@ -14,34 +14,7 @@ import {
 import SubItemIcon from "../icons/SubItemIcon";
 import { NavItem } from "../types";
 
-const themes: any = {
-  light: {
-    sidebar: {
-      backgroundColor: "#f7f7f9",
-      color: "#607489",
-    },
-    menu: {
-      menuContent: "#f7f7f9",
-      icon: "#0098e5",
-      disabled: {
-        color: "#9fb6cf",
-      },
-    },
-  },
-  dark: {
-    sidebar: {
-      backgroundColor: "#0b2948",
-      color: "#8ba1b7",
-    },
-    menu: {
-      menuContent: "#082440",
-      icon: "#59d0ff",
-      disabled: {
-        color: "#3e5e7e",
-      },
-    },
-  },
-};
+
 interface SidebarLayoutProps extends SidebarProps {
   expanded?: boolean;
   collapsed?: boolean;
@@ -64,6 +37,8 @@ interface SidebarLayoutProps extends SidebarProps {
   searchParams?: any;
   id?: string;
   handleRouteChange: (e: string) => any;
+  menuItemStyles: MenuItemStyles;
+  themes:any
 }
 
 export default function SidebarLayout({
@@ -126,40 +101,10 @@ export default function SidebarLayout({
   searchParams,
   id,
   handleRouteChange,
+  menuItemStyles,
+  themes,
   ...rest
 }: SidebarLayoutProps) {
-  const menuItemStyles: MenuItemStyles = {
-    root: {
-      backgroundColor: "var(--main-bg)", //behind the curve
-      fontSize: "13px",
-      fontWeight: 400,
-    },
-    icon: {
-      color: themes[theme].menu.icon,
-      [`&.${menuClasses.disabled}`]: {
-        color: themes[theme].menu.disabled.color,
-      },
-    },
-    SubMenuExpandIcon: {
-      display: collapsed && !expanded ? "none" : undefined,
-      marginRight: "25px",
-      marginBottom: "4px !important",
-    },
-    subMenuContent: ({ level }) => ({
-      backgroundColor: level === 0 ? "white" : "transparent",
-    }),
-    button: () => ({
-      padding: "0px 0px",
-      margin: "0px 0px",
-      height: "35px",
-      [`&.${menuClasses.disabled}`]: {
-        color: "#9fb6cf",
-      },
-    }),
-    label: ({ open }) => ({
-      fontWeight: open ? 600 : undefined,
-    }),
-  };
 
   // Split the URL into parts
   const urlParts = path?.split("/");
